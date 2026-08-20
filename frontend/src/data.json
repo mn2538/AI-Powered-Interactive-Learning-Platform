@@ -1,0 +1,30 @@
+{
+  "Node.js": {
+    "description": "JavaScript runtime for building fast, scalable server-side applications.",
+    "tag": "Backend"
+  },
+  "React": {
+    "description": "Library for building interactive user interfaces with reusable components.",
+    "tag": "Frontend"
+  },
+  "Express": {
+    "description": "Minimal Node.js web framework for routing and middleware handling.",
+    "tag": "Backend"
+  },
+  "PostgreSQL": {
+    "description": "Reliable relational database system with strong SQL and ACID support.",
+    "tag": "Database"
+  },
+  "MongoDB": {
+    "description": "Document database optimized for JSON-like flexible storage.",
+    "tag": "Database"
+  },
+  "MySQL": {
+    "description": "Popular open-source relational database management system.",
+    "tag": "Database"
+  },
+  "Tailwind": {
+    "description": "Utility-first CSS framework for rapidly styling web interfaces.",
+    "tag": "CSS"
+  }
+}
