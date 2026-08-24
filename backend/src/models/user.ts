@@ -1,3 +1,4 @@
+import { ModuleLinker } from "node:vm";
 import { pool } from "../config/db.js";
 
 interface ModelResponse {
@@ -9,12 +10,16 @@ interface ModelResponse {
 
 export const findByEmail = async(email: string): Promise<ModelResponse | null> =>  {
     const query = `SELECT id, name, email, password from users where email = $1`;
-
     const result = await pool.query(query, [email]);
-
     if(result.rows.length === 0){ 
         return null;
     } 
+    return result.rows[0];
+}
+
+export const createUser = async(name: string, email: string, password: string): Promise<ModelResponse> => {
+    const query = `INSERT INTO users (name, email, password) value ($1, $2, $3) RETURNING id, name, email, password`;
+    const result = await pool.query(query, [name, email, password]);
 
     return result.rows[0];
 }

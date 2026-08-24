@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { findByEmail } from "../models/user.ts";
+import { findByEmail, createUser } from "../models/user.ts";
 
 interface User {
   id: number,
@@ -48,10 +48,20 @@ return {
 }
 
 export const register = async(name: string, email: string, password: string) : Promise<RegisterResponse> => {
-  const user = await findByEmail(email);
-  if(user){
+  const existingUser = await findByEmail(email);
+  if(existingUser){
     throw new Error("User Already Exists");
   }
-  
 
+  const hashedPass = await bcrypt.hash(password, 10);
+  const newUser = await createUser(name, email, hashedPass);
+
+  return {
+    success: true,
+    user: {
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email
+    }
+  };
 }

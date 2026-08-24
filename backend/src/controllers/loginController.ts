@@ -30,14 +30,14 @@ export const login = async(req: Request, res: Response) => {
 
 export const register = async(req: Request, res: Response) => {
     try{
-        const {name, email, password} = req.body;
+        const { name, email, password } = req.body;
         const result = await authServices.register(name, email, password);
         res.status(200).json(result);
     }
     catch(err) {
         res.status(400).json({
             success: false,
-            message: err,
+            message: err instanceof Error ? err.message : "Registration failed",
         })
     }
 }
